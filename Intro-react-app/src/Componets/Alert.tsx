@@ -41,37 +41,22 @@
 import { useState } from "react";
 
 interface AlertProps {
-  children: string;
-  // heading : string
+ children:string;
+onClose: () => void;
+
 }
+const Alert = ({ children, onClose }: AlertProps) => {
+  // const [alerted, setAlerted] = useState("");
 
-const Alert = ({ children }: AlertProps) => {
-  const [alerted, setAlerted] = useState("");
-
-  const handleShowAlert = () => {
-    setAlerted("I have been clicked");
-  };
-
-  const handleCloseAlert = () => {
-    setAlerted("");
-  };
+ 
 
   return (
     <>
-      {alerted ? (
-        <div className="alert alert-primary" role="alert">
-          {children}
-          <p>{alerted}</p>
-          <button className="btn btn-danger" onClick={handleCloseAlert}>
-            X
-          </button>
-        </div>
-      ) : (
-        <button className="btn btn-primary" onClick={handleShowAlert}>
-          Show Alert
-          {/* {alertMessage} */}
-        </button>
-      )}
+    <div className="alert alert-primary alert-dismissible"  role="alert">
+     {children}
+    <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close" onClick={onClose}></button>
+    </div>
+    {/* <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close" onClick={onClose}></button> */}
     </>
   );
 };
